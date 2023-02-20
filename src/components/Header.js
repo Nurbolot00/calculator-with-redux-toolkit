@@ -1,11 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { authActionTypes } from "../store/auth/AuthReducer";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router";
 import classes from "./Header.module.css";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const isAuthorized = useSelector((state) => state.auth.isAuthorized);
+ const navigate = useNavigate()
+ const logout = () =>{
+  navigate("/")
+ }
+ const isAuthorized = useSelector((state) => state.auth.isAuthorized);
   return (
+    <>
     <header className={classes.header}>
       <h1>Redux Auth</h1>
       {isAuthorized && (
@@ -18,12 +22,14 @@ const Header = () => {
               <a href="/">My Sales</a>
             </li>
             <li>
-              <button onClick={()=>dispatch({type: authActionTypes.LOG_OUT})}>Logout</button>
+              <button onClick={logout}>Logout</button>
             </li>
           </ul>{" "}
         </nav>
       )}
     </header>
+    <Outlet/>
+    </>
   );
 };
 

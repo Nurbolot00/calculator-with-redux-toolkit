@@ -1,22 +1,52 @@
+import {createSlice} from '@reduxjs/toolkit'
+
+
 export const authActionTypes = {
-    LOG_IN: "LOG_IN",
-    LOG_OUT: "LOG_OUT",
+  LOG_IN: "LOG_IN",
+  LOG_OUT: "LOG_OUT",
+};
+
+const initialState = {
+  email: "",
+  isAuthorized: false,
+};
+
+
+
+
+
+export const authSlice = createSlice({
+    name: "auth",
+    initialState,
+    reducers:{
+    login (state, action) {
+      state.email = action.payload;
+      state.isAuthorized = true
+    },
+    logout (state) {
+  state.email = "";
+  state.isAuthorized = false;
     }
-    
-    const initialState = {
-    email: "",
-    isAuthorized: false
-    }
-    export const authReducer  = (state= initialState, action) => {
-    switch(action.type) {
+  }
+  });
+  
+  export const  authActions = authSlice.actions
+
+
+
+
+
+
+export const authReducer = (state = initialState, action) => {
+  switch (action.type) {
     case authActionTypes.LOG_IN:
-    return {
-    email: action.payload,
-    isAuthorized: true,
-    }
+      return {
+        email: action.payload,
+        isAuthorized: true,
+      };
     case authActionTypes.LOG_OUT:
-    return initialState;
+      return initialState;
     default:
-    return state
-    }
-    }
+      return state;
+  }
+};

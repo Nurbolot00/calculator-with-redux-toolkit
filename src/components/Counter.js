@@ -1,31 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { calculatorActionType} from '../store/calculator/CalculatorReducer';
+import { calculatorActions } from '../store/calculator/CalculatorReducer';
 import classes from './Counter.module.css';
 
 const Counter = () => {
 
   const result = useSelector((state)=>state.calculator.result)
   const dispatch = useDispatch()
-  
 
   const addHandler = ()=>{
-    dispatch( {type: calculatorActionType.ADD , payload: 5})
+    dispatch(calculatorActions.add(5))
+  }
+  const myltiplyHandler = ()=>{
+    dispatch(calculatorActions.multiply(2))
   }
 
   const subtractHandler = ()=>{
-  dispatch( {type: calculatorActionType.SUBTRACT , payload: 10})
+  dispatch(calculatorActions.subtract(10))
   }
 
   const divideHandler = ()=>{
-    dispatch( {type: calculatorActionType.DIVIDE , payload: 4})
+    dispatch(calculatorActions.divide(4))
   }
-
-  const myltiplyHandler = ()=>{
-    dispatch( {type: calculatorActionType.MULTIPLY , payload:2 })
-  }
-
 
   return (
+    <>
     <main className={classes.counter}>
       <h1>Redux Calculator</h1>
       <div className={classes.value}>Result: {result}</div>
@@ -34,6 +32,7 @@ const Counter = () => {
       <button onClick={myltiplyHandler}>*2</button>
       <button onClick={divideHandler}>/4</button>
     </main>
+    </>
   );
 
 };

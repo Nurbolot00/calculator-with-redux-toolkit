@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authActionTypes } from '../store/auth/AuthReducer';
+import { useNavigate } from 'react-router';
+import { authActions } from '../store/auth/AuthReducer';
 import classes from './Auth.module.css';
 
 const Auth = () => {
+  const navigate = useNavigate()
 const dispatch = useDispatch()
 const [formState, setState] = useState({
 email: "",
@@ -18,10 +20,8 @@ setState(prevState => ({ ...prevState, [name]: event.target.value}))
   const submitHandler = (e) => {
   e.preventDefault()
   if(formState.email === "test@gmail.com" && formState.password === "123123" ) {
-  dispatch({
-  type: authActionTypes.LOG_IN,
-  payload: formState.email
-  })
+    navigate("/header/calculator");
+    dispatch(authActions.login(formState.email));
   }
   }
   return (

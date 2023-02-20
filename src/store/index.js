@@ -1,11 +1,11 @@
 import { combineReducers, createStore } from "redux";
 
-import { authReducer } from "./auth/AuthReducer";
-import { calculatorReducer } from "./calculator/CalculatorReducer";
+import { authSlice } from "./auth/AuthReducer";
+import { calculatorSlice } from "./calculator/CalculatorReducer";
 
 const rootReducer = combineReducers({
-  calculator: calculatorReducer,
-  auth: authReducer,
+  calculator: calculatorSlice.reducer,
+  auth: authSlice.reducer
 });
 
 export const store = createStore(rootReducer);
